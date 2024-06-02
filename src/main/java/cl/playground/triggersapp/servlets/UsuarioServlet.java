@@ -1,14 +1,18 @@
 package cl.playground.triggersapp.servlets;
 
+import cl.playground.triggersapp.database.DatabaseConnection;
 import cl.playground.triggersapp.entities.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,18 +21,31 @@ public class UsuarioServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
         List<Usuario> listaUsuarios = new ArrayList<>();
-        listaUsuarios.add(new Usuario("232141", "andres", "sepulveda", "9 2312 2411"));
-        listaUsuarios.add(new Usuario("5636346", "alejandro", "valenzuela", "9 4112 6444"));
-        listaUsuarios.add(new Usuario("65755434", "felipe", "kessi", "9 3222 1222"));
-        listaUsuarios.add(new Usuario("86776", "nelson", "nelcarca", "9 2333 4555"));
-        listaUsuarios.add(new Usuario("42352", "rigoberto", "allirue", "9 1555 4333"));
 
-        // Llamamos a la sesion que se genera por defecto cuando el usuario entra a la web.
-        HttpSession miSesion = req.getSession();
-        miSesion.setAttribute("listaUsuarios", listaUsuarios);
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
 
-        resp.sendRedirect("mostrarUsuarios.jsp");
+            while (rs.next()) {
+                Usuario usuario = new Usuario(
+                        rs.getString("id"),
+                        rs.getString("nombre"),
+                        rs.getString("apellido"),
+                        rs.getString("telefono")
+                );
+                listaUsuarios.add(usuario);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println("<h3>Error al conectar a la base de datos</h3>");
+        }
+
+        for (Usuario usuario : listaUsuarios) {
+            out.println("<p>" + usuario + "</p>");
+        }
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

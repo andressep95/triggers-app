@@ -1,13 +1,16 @@
 # Install Tomcat & openjdk 8 (openjdk has java and javac)
 FROM tomcat:jdk8-openjdk
 
+# Download the PostgreSQL driver
+ADD https://jdbc.postgresql.org/download/postgresql-42.2.20.jar /usr/local/tomcat/lib/
+
 # Copy source files to tomcat folder structure
 COPY src/main/webapp/ /usr/local/tomcat/webapps/ROOT/
-COPY src/main/java/ /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
+COPY src/main/java/cl/playground/triggersapp/ /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/cl/playground/triggersapp/
+COPY src/main/resources/ /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
-# Compile all Java files
-RUN find /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/ -name "*.java" -exec javac -cp ".:/usr/local/tomcat/lib/servlet-api.jar" -d /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/ {} +
+# Compile the Java classes
+RUN find /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/cl/playground/triggersapp/ -name "*.java" -exec javac -cp ".:/usr/local/tomcat/lib/servlet-api.jar:/usr/local/tomcat/lib/postgresql-42.2.20.jar" -d /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/ {} +
 
-# Serve Tomcat
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
