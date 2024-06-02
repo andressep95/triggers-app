@@ -3,10 +3,10 @@ FROM tomcat:jdk8-openjdk
 
 # Copy source files to tomcat folder structure
 COPY src/main/webapp/ /usr/local/tomcat/webapps/ROOT/
-COPY src/main/java/cl/playground/triggersapp/servlets/ /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/cl/playground/triggersapp/servlets/
+COPY src/main/java/ /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
-# Compile the servlets
-RUN ["javac", "-cp", ".:/usr/local/tomcat/lib/servlet-api.jar", "-d", "/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/", "/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/cl/playground/triggersapp/servlets/HelloServlet.java"]
+# Compile all Java files
+RUN find /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/ -name "*.java" -exec javac -cp ".:/usr/local/tomcat/lib/servlet-api.jar" -d /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/ {} +
 
 # Serve Tomcat
 EXPOSE 8080
