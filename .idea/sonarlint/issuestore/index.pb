@@ -14,12 +14,3 @@ m
 =src/main/java/cl/playground/triggersapp/entities/Usuario.java,d/e/de8f95bd5b5360db9fefbefc97a3ee4a9d747200
 m
 =src/main/java/cl/playground/triggersapp/entities/Product.java,1/a/1a542765ae48047e4c26a3255d32e3ae5b8c3613
-o
-?src/main/java/cl/playground/triggersapp/entities/Quotation.java,6/9/6934ec0521e46312dfbd6f882d2cb7934d844ac7
-s
-Csrc/main/java/cl/playground/triggersapp/entities/QuotationItem.java,7/4/7439e4b7c505cb1d157910e2296fe77f37eafbc6
-B
-docker-compose.yml,3/5/35b8c13cf2eb2a194eada000eb310d65aed53b2a
-:
-
-Dockerfile,6/6/6651ddff6eb82c840ced7c1dddee15c6e1913dd4

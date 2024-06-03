@@ -23,5 +23,10 @@
     <form action="products" method="GET">
         <button type="submit">Mostrar Productos</button>
     </form>
+
+    <h2>Ver lista de Cotizaciones</h2>
+    <form action="quotations" method="GET">
+        <button type="submit">Mostrar Cotizaciones</button>
+    </form>
 </body>
 </html>

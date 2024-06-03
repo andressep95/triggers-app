@@ -1,11 +1,13 @@
 package cl.playground.triggersapp.entities;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Quotation {
     private int id;
     private Timestamp createdAt;
     private double total;
+    private List<QuotationItem> items;
 
     public Quotation() {}
 
@@ -38,6 +40,13 @@ public class Quotation {
     public void setTotal(double total) {
         this.total = total;
     }
+    public List<QuotationItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<QuotationItem> items) {
+        this.items = items;
+    }
 
     @Override
     public String toString() {
@@ -45,6 +54,7 @@ public class Quotation {
                 "id=" + id +
                 ", createdAt=" + createdAt +
                 ", total=" + total +
+                ", items=" + items +
                 '}';
     }
 }

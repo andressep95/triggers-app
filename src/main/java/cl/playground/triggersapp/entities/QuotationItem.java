@@ -4,13 +4,15 @@ public class QuotationItem {
     private int quotationId;
     private int productId;
     private int quantity;
+    private Product product;
 
     public QuotationItem() {}
 
-    public QuotationItem(int quotationId, int productId, int quantity) {
+    public QuotationItem(int quotationId, int productId, int quantity, Product product) {
         this.quotationId = quotationId;
         this.productId = productId;
         this.quantity = quantity;
+        this.product = product;
     }
 
     public int getQuotationId() {
@@ -37,12 +39,21 @@ public class QuotationItem {
         this.quantity = quantity;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "QuotationItem{" +
                 "quotationId=" + quotationId +
                 ", productId=" + productId +
                 ", quantity=" + quantity +
+                ", product=" + product +
                 '}';
     }
 }
