@@ -18,5 +18,10 @@
     <form action="users" method="GET">
         <button type="submit">Mostrar Usuarios</button>
     </form>
+
+    <h2>Ver lista de Productos</h2>
+    <form action="products" method="GET">
+        <button type="submit">Mostrar Productos</button>
+    </form>
 </body>
 </html>
