@@ -18,13 +18,6 @@ CREATE TABLE IF NOT EXISTS quotation_items (
                                                PRIMARY KEY (quotation_id, product_id)
 );
 
-CREATE TABLE IF NOT EXISTS usuarios (
-                                        id SERIAL PRIMARY KEY,
-                                        nombre VARCHAR(50),
-                                        apellido VARCHAR(50),
-                                        telefono VARCHAR(15)
-);
-
 -- Crear función para calcular el total
 CREATE OR REPLACE FUNCTION calculate_total() RETURNS TRIGGER AS $$
 BEGIN
@@ -45,14 +38,6 @@ DROP TRIGGER IF EXISTS trg_calculate_total ON quotation_items;
 CREATE TRIGGER trg_calculate_total
     AFTER INSERT OR UPDATE ON quotation_items
     FOR EACH ROW EXECUTE FUNCTION calculate_total();
-
--- Insertar datos iniciales
-INSERT INTO usuarios (nombre, apellido, telefono) VALUES
-                                                      ('Andres', 'Sepulveda', '9 2312 2411'),
-                                                      ('Alejandro', 'Valenzuela', '9 4112 6444'),
-                                                      ('Felipe', 'Kessi', '9 3222 1222'),
-                                                      ('Nelson', 'Nelcarca', '9 2333 4555'),
-                                                      ('Rigoberto', 'Allirue', '9 1555 4333');
 
 -- Insertar productos
 INSERT INTO products (name, price) VALUES
@@ -81,3 +66,22 @@ INSERT INTO quotation_items (quotation_id, product_id, quantity) VALUES
                                                                      (4, 5, 1), -- 1 x Producto E
                                                                      (5, 1, 3), -- 3 x Producto A
                                                                      (5, 5, 2); -- 2 x Producto E
+
+-- Crear vistas
+
+-- Vista para Cotizaciones Completas
+CREATE VIEW cotizaciones_completas AS
+SELECT
+    q.id AS cotizacion_id,
+    q.created_at,
+    q.total,
+    p.id AS producto_id,
+    p.name AS producto_nombre,
+    p.price AS producto_precio,
+    qi.quantity AS cantidad
+FROM
+    quotations q
+        JOIN
+    quotation_items qi ON q.id = qi.quotation_id
+        JOIN
+    products p ON qi.product_id = p.id;

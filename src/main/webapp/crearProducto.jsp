@@ -2,20 +2,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Index</title>
+    <title>Crear Producto</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
-    <h2 class="mt-4">Ver lista de Productos</h2>
-    <form action="products" method="GET">
-        <button type="submit" class="btn btn-secondary">Mostrar Productos</button>
-    </form>
-
-    <h2 class="mt-4">Ver lista de Cotizaciones</h2>
-    <form action="quotations" method="GET">
-        <button type="submit" class="btn btn-secondary">Mostrar Cotizaciones</button>
+    <h1>Crear Producto</h1>
+    <form action="product" method="post">
+        <div class="form-group">
+            <label for="name">Nombre del Producto:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Precio:</label>
+            <input type="number" class="form-control" id="price" name="price" required>
+        </div>
+        <input type="hidden" name="action" value="create">
+        <button type="submit" class="btn btn-primary mt-3">Crear Producto</button>
     </form>
 </div>
 <!-- Bootstrap JS and dependencies -->

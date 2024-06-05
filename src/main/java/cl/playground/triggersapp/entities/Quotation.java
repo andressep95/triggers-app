@@ -1,6 +1,7 @@
 package cl.playground.triggersapp.entities;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Quotation {
@@ -9,12 +10,15 @@ public class Quotation {
     private double total;
     private List<QuotationItem> items;
 
-    public Quotation() {}
+    public Quotation() {
+        this.items = new ArrayList<>();
+    }
 
     public Quotation(int id, Timestamp createdAt, double total) {
         this.id = id;
         this.createdAt = createdAt;
         this.total = total;
+        this.items = new ArrayList<>();
     }
 
     public int getId() {
@@ -40,6 +44,7 @@ public class Quotation {
     public void setTotal(double total) {
         this.total = total;
     }
+
     public List<QuotationItem> getItems() {
         return items;
     }
