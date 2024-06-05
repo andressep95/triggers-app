@@ -1,0 +1,11 @@
+
+p
+java:S3008"NRename this field "URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á›¸Úøÿÿÿÿ8ö¬Ù¹ý1
+u
+java:S3008"SRename this field "USERNAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªµ¬Óüÿÿÿÿ8ì…Ú¹ý1
+u
+java:S3008"SRename this field "PASSWORD" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìôÍ–ûÿÿÿÿ8ì…Ú¹ý1
+W
+java:S1118
+":Add a private constructor to hide the implicit public one.(¿Àò€8ù¬Ù¹ý1
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(¦ë›Úÿÿÿÿÿ8û‘Û¹ý1

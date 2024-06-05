@@ -57,6 +57,11 @@
                 <version>3.3.2</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <manifestEntries>
+                            <AddClasspath>true</AddClasspath>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
